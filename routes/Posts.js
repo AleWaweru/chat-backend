@@ -38,6 +38,8 @@ router.put("/title", validateToken, async (req, res) => {
     );
     res.json({newTitle});
 });
+
+// posttext
 router.put("/postText", validateToken, async (req, res) => {
     const { newPostText, id } = req.body;
     await Posts.update(
