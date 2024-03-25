@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "master": "index.js",
+  "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
     "build": "npm i"
