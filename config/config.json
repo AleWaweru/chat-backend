@@ -17,7 +17,7 @@
     "username": "root",
     "password": null,
     "database": "ChatDB",
-    "host": "127.0.0.1",
+    "host": "brh8w1zlavnjerx8nel9-mysql.services.clever-cloud.com",
     "dialect": "mysql"
   }
 }
