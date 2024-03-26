@@ -15,9 +15,10 @@
   },
   "production": {
     "username": "root",
-    "password": "brh8w1zlavnjerx8nel9",
+    "password": null,
     "database": "ChatDB",
-    "host": "brh8w1zlavnjerx8nel9-mysql.services.clever-cloud.com",
+    "host": "127.0.0.1",
     "dialect": "mysql"
+    
   }
 }
