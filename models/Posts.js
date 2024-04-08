@@ -1,28 +1,28 @@
-module.exports = (sequelize, DataTypes) => {
+const mongoose = require('mongoose');
 
-    const Posts = sequelize.define("Posts", {
-       title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-       },
-       postText: {
-        type: DataTypes.STRING,
-        allowNull: false,
-       },
-       username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-       },
-    });
+const postSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  postText: {
+    type: String,
+    required: true,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment',
+  }],
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Like',
+  }],
+});
 
-    Posts.associate = (models) =>{
-        Posts.hasMany(models.Comments, {
-            onDelete: "cascade",
-        });
-        Posts.hasMany(models.Likes, {
-            onDelete: "cascade",
-        });
-    }
+const PostModel = mongoose.model('Post', postSchema);
 
-    return Posts
-}
+module.exports = PostModel;

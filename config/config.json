@@ -17,7 +17,7 @@
     "username": "root",
     "password": null,
     "database": "ChatDB",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mysql"
     
   }

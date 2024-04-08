@@ -1,7 +1,18 @@
-module.exports = (sequelize, DataTypes) => {
+const mongoose = require('mongoose');
 
-    const Likes = sequelize.define("Likes", {
-    });
+const likeSchema = new mongoose.Schema({
+    postId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post',
+        required: true
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }
+});
 
-    return Likes;
-}
+const LikeModel = mongoose.model('Like', likeSchema);
+
+module.exports = LikeModel;

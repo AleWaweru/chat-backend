@@ -1,24 +1,31 @@
 const express = require("express");
 const router = express.Router();
-const { Likes } = require("../models");
+const LikeModel = require("../models/Likes");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
 router.post("/", validateToken, async (req, res) => {
-    const { PostId } = req.body;
-  const UserId = req.user.id;
+    const { postId } = req.body;
+    const userId = req.user.id;
 
-  const found = await Likes.findOne({
-    where: { PostId: PostId, UserId: UserId },
-  });
-  if (!found) {
-    await Likes.create({ PostId: PostId, UserId: UserId });
-    res.json({liked: true});
-  } else {
-    await Likes.destroy({
-      where: { PostId: PostId, UserId: UserId },
-    });
-    res.json({liked: false});
-  }
+    try {
+        const found = await LikeModel.findOne({
+            postId: postId,
+            userId: userId
+        });
+
+        if (!found) {
+            await LikeModel.create({ postId: postId, userId: userId });
+            res.json({ liked: true });
+        } else {
+            await LikeModel.deleteOne({
+                postId: postId,
+                userId: userId
+            });
+            res.json({ liked: false });
+        }
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 module.exports = router;

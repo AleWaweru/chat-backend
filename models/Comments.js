@@ -1,15 +1,21 @@
-module.exports = (sequelize, DataTypes) => {
+const mongoose = require('mongoose');
 
-    const Comments = sequelize.define("Comments", {
-       commentBody: {
-        type: DataTypes.STRING,
-        allowNull: false,
-       },
-       username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-       },
-    });
+const commentSchema = new mongoose.Schema({
+  commentBody: {
+    type: String,
+    required: true,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  postId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post',
+    required: true,
+  },
+});
 
-    return Comments;
-}
+const CommentModel = mongoose.model('Comment', commentSchema);
+
+module.exports = CommentModel;
